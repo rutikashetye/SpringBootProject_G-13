@@ -15,7 +15,7 @@ public class Wishlist {
 	int wishlistId;
 	
 	@OneToOne
-	Customer customer;
+	User user;
 
 	public int getWishlistId() {
 		return wishlistId;
@@ -25,12 +25,12 @@ public class Wishlist {
 		this.wishlistId = wishlistId;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public User getCustomer() {
+		return user;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setCustomer(User user) {
+		this.user = user;
 	}
 	
 	

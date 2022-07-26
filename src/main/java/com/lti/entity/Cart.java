@@ -19,7 +19,7 @@ public class Cart {
 	int cartId;
 	
 	@OneToOne
-	Customer customer;
+	User user;
 	
 	@OneToMany(mappedBy="cart")
 	List<Item>items;
@@ -39,13 +39,13 @@ public class Cart {
 	}
 
 
-	public Customer getCustomer() {
-		return customer;
+	public User getCustomer() {
+		return user;
 	}
 
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setCustomer(User user) {
+		this.user = user;
 	}
 
 

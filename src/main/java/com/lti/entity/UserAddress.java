@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-public class CustomerAddress {
+public class UserAddress {
 
 	@Id
 	@SequenceGenerator(name = "address_seq", initialValue = 7001, allocationSize = 1)
@@ -23,7 +23,7 @@ public class CustomerAddress {
 	String Country;
 
 	@ManyToOne
-	Customer customer;
+	User user;
 
 	public int getAddressId() {
 		return addressId;
@@ -81,12 +81,12 @@ public class CustomerAddress {
 		Country = country;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public User getCustomer() {
+		return user;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setCustomer(User user) {
+		this.user = user;
 	}
 	
 	
