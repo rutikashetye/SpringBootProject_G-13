@@ -9,9 +9,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.lti.entity.Order;
-import com.lti.entity.Product;
-import com.lti.entity.Wishlist;
 
 @Repository
 public class UserDaoImpl implements UserDao {

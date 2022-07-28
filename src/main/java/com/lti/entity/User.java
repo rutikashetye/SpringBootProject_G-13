@@ -31,7 +31,7 @@ public class User {
 	Cart cart;
 	
 	@OneToOne(mappedBy="user")
-	Wishlist wishlist;
+	Wish wishlist;
 
 	public int getuserId() {
 		return userId;
@@ -89,11 +89,11 @@ public class User {
 		this.cart = cart;
 	}
 
-	public Wishlist getWishlist() {
+	public Wish getWishlist() {
 		return wishlist;
 	}
 
-	public void setWishlist(Wishlist wishlist) {
+	public void setWishlist(Wish wishlist) {
 		this.wishlist = wishlist;
 	}
 	

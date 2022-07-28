@@ -2,9 +2,7 @@ package com.lti.dao;
 
 import java.util.List;
 
-import com.lti.entity.Order;
-import com.lti.entity.Product;
-import com.lti.entity.Wishlist;
+
 
 
 public interface UserDao {

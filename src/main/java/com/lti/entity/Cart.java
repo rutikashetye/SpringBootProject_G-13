@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -19,6 +20,7 @@ public class Cart {
 	int cartId;
 	
 	@OneToOne
+	@JoinColumn(name="userId")
 	User user;
 	
 	@OneToMany(mappedBy="cart")

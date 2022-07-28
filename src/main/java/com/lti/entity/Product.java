@@ -37,15 +37,15 @@ public class Product {
 	List<Item>items;
 
 	@OneToMany(mappedBy="product")
-	List<Item>Wishlistitems;
+	List<WishItem>Wishlistitems;
 	
 	
 	
-	public List<Item> getWishlistitems() {
+	public List<WishItem> getWishlistitems() {
 		return Wishlistitems;
 	}
 
-	public void setWishlistitems(List<Item> wishlistitems) {
+	public void setWishlistitems(List<WishItem> wishlistitems) {
 		Wishlistitems = wishlistitems;
 	}
 
