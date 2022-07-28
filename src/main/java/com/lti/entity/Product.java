@@ -27,12 +27,43 @@ public class Product {
 	String description;
 	boolean isApproved;
 	String category;
+	int available_quantity;
+	String color;
 	
 	@ManyToOne
 	Retailer retailer;
 	
 	@OneToMany(mappedBy="product")
 	List<Item>items;
+
+	@OneToMany(mappedBy="product")
+	List<Item>Wishlistitems;
+	
+	
+	
+	public List<Item> getWishlistitems() {
+		return Wishlistitems;
+	}
+
+	public void setWishlistitems(List<Item> wishlistitems) {
+		Wishlistitems = wishlistitems;
+	}
+
+	public int getAvailable_quantity() {
+		return available_quantity;
+	}
+
+	public void setAvailable_quantity(int available_quantity) {
+		this.available_quantity = available_quantity;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
 
 	public int getProductId() {
 		return productId;

@@ -3,11 +3,11 @@ package com.lti.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lti.dao.ShoppersDao;
+import com.lti.dao.UserDao;
 
 @Service
-public class ShoppersServieImpl implements ShoppersService {
+public class UserServieImpl implements UserService {
 
 	@Autowired
-	ShoppersDao dao;
+	UserDao dao;
 }

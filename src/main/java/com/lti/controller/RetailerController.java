@@ -5,14 +5,15 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lti.service.ShoppersService;
+import com.lti.service.RetailerService;
 
 
 @RestController
 @RequestMapping("/paark")
 @CrossOrigin
-public class ShoppersController {
+public class RetailerController {
 
 	@Autowired
-	ShoppersService service;
+	RetailerService service;
+	
 }
