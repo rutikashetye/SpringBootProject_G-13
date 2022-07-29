@@ -25,15 +25,15 @@ class ShopperspaarkApplicationTests {
 	@Autowired
 	RetailerController reCon;
 	
-//	@Test
-//	void AddAdmin()
-//	{
-//		Admin a = new Admin();
-//		a.setPassword("admin123");
-//		String msg = con.signup(a);
-//		assertEquals("Signup Successful",msg);
-//		
-//	}
+	@Test
+	void AddAdmin()
+	{
+		Admin a = new Admin();
+		a.setPassword("Admin@123");
+		String msg = con.signup(a);
+		assertEquals("Signup Successful",msg);
+		
+	}
 //	//Tested
 
 	@Test

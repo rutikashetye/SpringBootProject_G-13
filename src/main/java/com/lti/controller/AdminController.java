@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lti.dto.AdminLoginData;
 import com.lti.entity.Admin;
 import com.lti.service.AdminService;
-
+//http://localhost/9090/paark/add-admin
 
 @RestController
 @RequestMapping("/paark")

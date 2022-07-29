@@ -28,7 +28,7 @@ public class Product {
 	double discountedPrice;
 	String description;
 	boolean isApproved;
-	String category;
+	Category category;
 	int available_quantity;
 	String color;
 	
@@ -139,11 +139,11 @@ public class Product {
 		this.isApproved = isApproved;
 	}
 
-	public String getCategory() {
+	public Category getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 
