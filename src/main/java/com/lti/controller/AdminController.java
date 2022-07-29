@@ -15,7 +15,7 @@ import com.lti.service.AdminService;
 
 @RestController
 @RequestMapping("/paark")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class AdminController {
 
 	@Autowired
@@ -26,6 +26,7 @@ public class AdminController {
 		String m=service.addAdmin(admin); 
 	    return m;
 	}
+	//Tested
 	
 	@PostMapping("/admin-login")
 	public boolean login(@RequestBody AdminLoginData data )
@@ -33,4 +34,5 @@ public class AdminController {
 		boolean isValid = service.adminLogin(data.getadminId(), data.getPassword());
 		return isValid;
 	}
+	//Tested
 }
