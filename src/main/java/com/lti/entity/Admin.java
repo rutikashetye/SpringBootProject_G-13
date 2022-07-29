@@ -5,8 +5,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="tbl_admin")
 public class Admin {
 	@Id
 	@SequenceGenerator(name="admin_seq",initialValue = 786, allocationSize = 1)

@@ -8,10 +8,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import java.util.List;
 
 @Entity
+@Table(name="tbl_wish")
 public class Wish {
 	@Id
 	@SequenceGenerator(name = "wish_seq", initialValue = 8001,allocationSize = 1)
