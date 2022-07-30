@@ -3,6 +3,8 @@ package com.lti.entity;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="tbl_product")
@@ -28,6 +32,7 @@ public class Product {
 	double discountedPrice;
 	String description;
 	boolean isApproved;
+	@Enumerated(EnumType.STRING)
 	Category category;
 	int available_quantity;
 	String color;
@@ -42,7 +47,7 @@ public class Product {
 	List<WishItem>Wishlistitems;
 	
 	
-	
+	@JsonIgnore
 	public List<WishItem> getWishlistitems() {
 		return Wishlistitems;
 	}
@@ -155,6 +160,7 @@ public class Product {
 		this.retailer = retailer;
 	}
 
+	@JsonIgnore
 	public List<Item> getItems() {
 		return items;
 	}

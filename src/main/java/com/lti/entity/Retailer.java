@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="tbl_retailer")
 public class Retailer {
@@ -25,14 +27,33 @@ public class Retailer {
 	String retailerPassword;
 	String retailerEmail;
 	String retailerPhoneNo;
+	String aadharCard;
+	String panCard;
 	boolean isRetailerApproved;
 	String gstNo;
 	
-	@OneToOne(mappedBy="retailer",cascade=CascadeType.ALL)
-	RetailerDocument retailerDocument;
-	
+		
 	@OneToMany(mappedBy="retailer")
 	List<Product> products;
+
+	
+	
+	
+	public String getAadharCard() {
+		return aadharCard;
+	}
+
+	public void setAadharCard(String aadharCard) {
+		this.aadharCard = aadharCard;
+	}
+
+	public String getPanCard() {
+		return panCard;
+	}
+
+	public void setPanCard(String panCard) {
+		this.panCard = panCard;
+	}
 
 	public int getRetailerId() {
 		return retailerId;
@@ -90,14 +111,7 @@ public class Retailer {
 		this.gstNo = gstNo;
 	}
 
-	public RetailerDocument getRetailerDocument() {
-		return retailerDocument;
-	}
-
-	public void setRetailerDocument(RetailerDocument retailerDocument) {
-		this.retailerDocument = retailerDocument;
-	}
-
+	@JsonIgnore
 	public List<Product> getProducts() {
 		return products;
 	}

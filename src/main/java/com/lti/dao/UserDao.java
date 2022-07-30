@@ -2,6 +2,9 @@ package com.lti.dao;
 
 import java.util.List;
 
+import com.lti.entity.Cart;
+import com.lti.entity.User;
+
 
 
 
@@ -21,7 +24,10 @@ public interface UserDao {
 //			placeOrder(Order order)    [ru]
 //			findOrderByUserId(int userId)  [ru]
 	
+	User addorUpdateUser(User user);
+	boolean userLogin(int userId,String password);
 	
+	void addCart(Cart cart);
 	
 	
 }

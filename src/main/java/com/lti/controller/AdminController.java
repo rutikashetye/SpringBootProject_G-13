@@ -1,15 +1,22 @@
 package com.lti.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lti.dto.AdminLoginData;
 import com.lti.entity.Admin;
+import com.lti.entity.Product;
+import com.lti.entity.Retailer;
 import com.lti.service.AdminService;
 //http://localhost/9090/paark/add-admin
 
@@ -35,4 +42,29 @@ public class AdminController {
 		return isValid;
 	}
 	//Tested
+	
+	
+	@PostMapping("/view-products")
+	public List<Product> is_approvedProducts() {
+		return service.is_approvedProducts();
+	}
+
+	@PostMapping("/approveproduct/{productId}")
+	public String approveProduct(@PathVariable int productId) {
+		return service.approveProduct(productId);
+	}
+
+	
+	@PostMapping("/approveretailer/{retailerId}")
+	public String approveRetailer(@PathVariable int retailerId) {
+		return service.approveRetailer(retailerId);
+	}
+	
+	
+
+	
+	
+	
+	
+	
 }

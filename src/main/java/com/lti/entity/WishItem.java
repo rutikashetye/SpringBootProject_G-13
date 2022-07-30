@@ -15,7 +15,7 @@ public class WishItem {
 
 	@Id
 	@SequenceGenerator(name = "wishItem_seq", initialValue = 9001,allocationSize = 1)
-	@GeneratedValue(generator = "wishItem-seq",strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(generator = "wishItem_seq",strategy = GenerationType.SEQUENCE)
 	int wishItemId;
 	
 	double quantity;

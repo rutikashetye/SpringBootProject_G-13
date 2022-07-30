@@ -30,7 +30,7 @@ public class Cart {
 	
 	
 	@OneToMany(mappedBy="cart")
-	List<Order>orders;
+	List<Payment>payments;
 
 
 	public int getCartId() {
@@ -43,12 +43,12 @@ public class Cart {
 	}
 
 
-	public User getCustomer() {
+	public User getUser() {
 		return user;
 	}
 
 
-	public void setCustomer(User user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 
@@ -63,13 +63,13 @@ public class Cart {
 	}
 
 
-	public List<Order> getOrders() {
-		return orders;
+	public List<Payment> getOrders() {
+		return payments;
 	}
 
 
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
+	public void setOrders(List<Payment> payments) {
+		this.payments = payments;
 	}
 	
 	

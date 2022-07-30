@@ -14,41 +14,52 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tbl_order")
-public class Order {
+@Table(name="tbl_payment")
+public class Payment {
 	
 	@Id
-	@SequenceGenerator(name="order_seq",initialValue=2001,allocationSize=1)
-	@GeneratedValue(generator="order_seq",strategy=GenerationType.SEQUENCE)
-	int orderId;
+	@SequenceGenerator(name="pay_seq",initialValue=2001,allocationSize=1)
+	@GeneratedValue(generator="pay_seq",strategy=GenerationType.SEQUENCE)
+	int paymentId;
 	
 	@Enumerated(EnumType.STRING)
-	payType payment;
+	payType paymentType;
 	
 	@Enumerated(EnumType.STRING)
 	orderStatus status;
 	
 	double amount;
-	LocalDate date;
+	LocalDate paymentDate;
 	
 	@ManyToOne
 	@JoinColumn(name="cartId")
 	Cart cart;
 
-	public int getOrderId() {
-		return orderId;
+	
+	
+	
+	public LocalDate getPaymentDate() {
+		return paymentDate;
 	}
 
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
+	public void setPaymentDate(LocalDate paymentDate) {
+		this.paymentDate = paymentDate;
 	}
 
-	public payType getPayment() {
-		return payment;
+	public int getPaymentId() {
+		return paymentId;
 	}
 
-	public void setPayment(payType payment) {
-		this.payment = payment;
+	public void setPaymentId(int paymentId) {
+		this.paymentId = paymentId;
+	}
+
+	public payType getPaymentType() {
+		return paymentType;
+	}
+
+	public void setPaymentType(payType paymentType) {
+		this.paymentType = paymentType;
 	}
 
 	public orderStatus getStatus() {
@@ -67,13 +78,6 @@ public class Order {
 		this.amount = amount;
 	}
 
-	public LocalDate getDate() {
-		return date;
-	}
-
-	public void setDate(LocalDate date) {
-		this.date = date;
-	}
 
 	public Cart getCart() {
 		return cart;
