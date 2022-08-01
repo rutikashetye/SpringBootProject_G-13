@@ -10,6 +10,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 @Entity
@@ -44,6 +46,7 @@ public class Wish {
 		this.user = user;
 	}
 
+	@JsonIgnore
 	public List<WishItem> getItems() {
 		return items;
 	}

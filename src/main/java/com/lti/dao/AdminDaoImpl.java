@@ -41,13 +41,6 @@ public class AdminDaoImpl implements AdminDao {
 		return Persisted;
 	}
 
-	@Override
-	public List<Product> is_approvedProducts() {
-		String jpql = "select p from tbl_product p where p.isApproved=true";
-		TypedQuery<Product> qry = em.createQuery(jpql, Product.class);
-		return qry.getResultList();
-	}
-
 	@Transactional
 	public String approveProduct(int productId) {
 		Product r = em.find(Product.class, productId);
@@ -70,16 +63,18 @@ public class AdminDaoImpl implements AdminDao {
 		return "Retailer not approved.";
 	}
 
-	public List<Product> viewAllProducts() {
-		String jpql = "select p from Product p";
-		TypedQuery<Product> query = em.createQuery(jpql, Product.class);
-		return query.getResultList();
+	@Override
+	public List<Retailer> is_approvedRetailer() {
+		String jpql = "select p from Retailer p where p.isRetailerApproved=true";
+		TypedQuery<Retailer> qry = em.createQuery(jpql,Retailer.class);
+		return qry.getResultList();
 	}
 
-	public List<Retailer> viewAllRetailer() {
-		String jpql = "select p from Retailer p";
-		TypedQuery<Retailer> query = em.createQuery(jpql, Retailer.class);
-		return query.getResultList();
+	@Override
+	public List<Product> is_approvedProducts() {
+		String jpql = "select p from Product p where p.isApproved=true";
+		TypedQuery<Product> qry = em.createQuery(jpql, Product.class);
+		return qry.getResultList();
 	}
 
 }

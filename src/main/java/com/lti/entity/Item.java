@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="tbl_item")
 public class Item {
@@ -19,6 +21,8 @@ public class Item {
 	int itemId;
 	
 	int quantity;
+	boolean isPurchased;
+	double totalPrice;
 	
 	@ManyToOne
 	@JoinColumn(name="cartId")
@@ -28,6 +32,26 @@ public class Item {
 	@ManyToOne
 	@JoinColumn(name="productId")
 	Product product;
+
+
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+
+
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+
+	public boolean isPurchased() {
+		return isPurchased;
+	}
+
+
+	public void setPurchased(boolean isPurchased) {
+		this.isPurchased = isPurchased;
+	}
 
 
 	public int getItemId() {
@@ -50,6 +74,7 @@ public class Item {
 	}
 
 
+	@JsonIgnore
 	public Cart getCart() {
 		return cart;
 	}
@@ -60,6 +85,7 @@ public class Item {
 	}
 
 
+	@JsonIgnore
 	public Product getProduct() {
 		return product;
 	}

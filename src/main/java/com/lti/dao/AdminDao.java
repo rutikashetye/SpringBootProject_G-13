@@ -11,8 +11,6 @@ import com.lti.entity.User;
 
 public interface AdminDao {
 
-//			approveRetailer(int retailerId) --(onupdate set isApproved to true) [komal]
-//			approveProducts(int productId)   [komal]
 //			addOrUpdateRetailer(Retailer retailer)   [komal]	
 	
 	boolean adminLogin(int adminId,String password);
@@ -22,7 +20,7 @@ public interface AdminDao {
 	String approveProduct(int productId);
 	String approveRetailer(int retailerId); 
 	
-	List<Retailer> viewAllRetailer();
+	public List<Retailer> is_approvedRetailer();
 
 	
 	

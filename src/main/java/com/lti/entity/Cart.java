@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="tbl_cart")
 public class Cart {
@@ -52,7 +54,7 @@ public class Cart {
 		this.user = user;
 	}
 
-
+	@JsonIgnore
 	public List<Item> getItems() {
 		return items;
 	}
@@ -63,6 +65,7 @@ public class Cart {
 	}
 
 
+	@JsonIgnore
 	public List<Payment> getOrders() {
 		return payments;
 	}

@@ -13,7 +13,9 @@ import javax.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.scheduling.quartz.LocalDataSourceJobStore;
 
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.lti.controller.AdminController;
 import com.lti.controller.RetailerController;
 import com.lti.controller.UserController;
@@ -24,9 +26,12 @@ import com.lti.entity.Admin;
 import com.lti.entity.Cart;
 import com.lti.entity.Category;
 import com.lti.entity.Item;
+import com.lti.entity.Payment;
 import com.lti.entity.Product;
 import com.lti.entity.Retailer;
 import com.lti.entity.User;
+import com.lti.entity.orderStatus;
+import com.lti.entity.payType;
 
 @SpringBootTest
 class ShopperspaarkApplicationTests {
@@ -76,6 +81,21 @@ class ShopperspaarkApplicationTests {
 		assertNotNull(i2);
 	}
 	
+	
+	@Test
+	void placeOrder() {
+		Cart c = uCon.getCartByCartId(4005);
+		Payment p = new Payment();
+		p.setStatus(orderStatus.placed);
+		p.setAmount(12000);
+		p.setPaymentDate(java.time.LocalDate.now());
+		p.setPaymentType(payType.cash);
+		p.setCart(c);
+		Payment p2 = uCon.placeOrder(p);
+		assertNotNull(p2);
+	}
+	
+	
 	@Test
 	void addRetailer() {
 			Retailer retailer=new Retailer();
@@ -89,38 +109,38 @@ class ShopperspaarkApplicationTests {
 	}//TEsted
 	
 	
-	@Test 
-	void addProduct()
-	{
-		Retailer r = redao.searchRetailerById(5001);
-		Product product=new Product();
-		product.setBrand("Levis");
-		product.setCategory(Category.men);
-		product.setColor("blue");
-		product.setDeal(10);
-		product.setAvailable_quantity(200);
-		product.setDescription("denim jeans");
-		product.setDiscountedPrice(1200);
-		product.setPrice(1500);
-		product.setProductName("Levis wide leg Jeans");
-		product.setRetailer(r);
-		String message=reCon.addProduct(product);
-		assertEquals("Product Added", message);
-	}
-	//Tested
-	
+//	@Test 
+//	void addProduct()
+//	{
+//		Retailer r = redao.searchRetailerById(5001);
+//		Product product=new Product();
+//		product.setBrand("Levis");
+//		product.setCategory(Category.women);
+//		product.setColor("blue");
+//		product.setDeal(10);
+//		product.setAvailable_quantity(400);
+//		product.setDescription("jeans");
+//		product.setDiscountedPrice(1500);
+//		product.setPrice(1000);
+//		product.setProductName("wide leg");
+//		product.setRetailer(r);
+//		String message=reCon.addProduct(product);
+//		assertEquals("Product Added", message);
+//	}
+//	//Tested
 //	
 //	
-	@Test
-	public void addorUpdateUserTest() {
-		User user = new User();
-		user.setuserName("Rutika Shetye");
-		user.setuserEmail("rutikashetye101@gmail.com");
-		user.setPhoneNo("9969802006");
-		user.setPassword("Rutika@123");
-		User savedUser = udao.addorUpdateUser(user);
-		assertNotNull(savedUser);
-	}//Tested
+//	
+//	@Test
+//	public void addorUpdateUserTest() {
+//		User user = new User();
+//		user.setuserName("Rutika Shetye");
+//		user.setuserEmail("rutikashetye101@gmail.com");
+//		user.setPhoneNo("9969802006");
+//		user.setPassword("Rutika@123");
+//		User savedUser = udao.addorUpdateUser(user);
+//		assertNotNull(savedUser);
+//	}//Tested
 	
 	
 	@Test
@@ -131,7 +151,9 @@ class ShopperspaarkApplicationTests {
 		{
 			System.out.println(in.getDescription());
 		}
-	}
+	}//Tested
+	
+	
 	
 	@Test
 	void isApproveTest()

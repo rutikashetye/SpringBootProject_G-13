@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="tbl_user123")
 public class User {
@@ -25,6 +27,7 @@ public class User {
 	String userEmail;
 	String password;
 	String phoneNo;
+	String gender;
 	
 	@OneToMany(mappedBy="user",cascade=CascadeType.ALL)
 	List<UserAddress> userAddresses;
@@ -34,6 +37,16 @@ public class User {
 	
 	@OneToOne(mappedBy="user")
 	Wish wishlist;
+
+	
+	
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
 	public int getuserId() {
 		return userId;
@@ -75,6 +88,7 @@ public class User {
 		this.phoneNo = phoneNo;
 	}
 
+	@JsonIgnore
 	public List<UserAddress> getuserAddresses() {
 		return userAddresses;
 	}
@@ -83,6 +97,7 @@ public class User {
 		this.userAddresses = userAddresses;
 	}
 
+	@JsonIgnore
 	public Cart getCart() {
 		return cart;
 	}
@@ -91,6 +106,7 @@ public class User {
 		this.cart = cart;
 	}
 
+	@JsonIgnore
 	public Wish getWishlist() {
 		return wishlist;
 	}

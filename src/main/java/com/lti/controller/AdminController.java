@@ -44,22 +44,26 @@ public class AdminController {
 	//Tested
 	
 	
-	@PostMapping("/view-products")
+	@GetMapping("/viewproducts")
 	public List<Product> is_approvedProducts() {
 		return service.is_approvedProducts();
 	}
 
-	@PostMapping("/approveproduct/{productId}")
+	@GetMapping("/approveproduct/{productId}")
 	public String approveProduct(@PathVariable int productId) {
 		return service.approveProduct(productId);
 	}
 
 	
-	@PostMapping("/approveretailer/{retailerId}")
+	@GetMapping("/approveretailer/{retailerId}")
 	public String approveRetailer(@PathVariable int retailerId) {
 		return service.approveRetailer(retailerId);
 	}
 	
+	@GetMapping("/viewretailers")
+	public List<Retailer> is_approvedRetailer() {
+		return service.is_approvedRetailer();
+	}
 	
 
 	

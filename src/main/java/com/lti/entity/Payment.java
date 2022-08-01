@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="tbl_payment")
 public class Payment {
@@ -79,6 +81,7 @@ public class Payment {
 	}
 
 
+	@JsonIgnore
 	public Cart getCart() {
 		return cart;
 	}

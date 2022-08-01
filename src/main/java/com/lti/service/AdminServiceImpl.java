@@ -50,8 +50,8 @@ public class AdminServiceImpl implements AdminService {
 	
 	
 	
-	public List<Retailer>viewAllRetailer() {
-	       return dao.viewAllRetailer();
+	public List<Retailer> is_approvedRetailer() {
+	       return dao.is_approvedRetailer();
 	}
 
 }
