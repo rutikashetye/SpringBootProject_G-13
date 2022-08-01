@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lti.dao.UserDao;
+import com.lti.dto.NewViewCartDto;
 import com.lti.dto.RegResponseDto;
 import com.lti.dto.UserResponseDto;
 import com.lti.entity.Cart;
 import com.lti.entity.Category;
+import com.lti.entity.Item;
 import com.lti.entity.Payment;
 import com.lti.entity.Product;
 import com.lti.entity.User;
@@ -23,6 +25,12 @@ public class UserServieImpl implements UserService {
 	@Autowired
 	EmailService service;
 
+	@Override
+	public List<NewViewCartDto> viewCart(int userId) {
+		List<NewViewCartDto>list=dao.viewCart(userId);
+		return list;
+	}
+	
 	public UserResponseDto addorUpdateUser(User user) {
 		try {
 			User user2 = dao.addOrUpdateUser(user);
@@ -59,19 +67,18 @@ public class UserServieImpl implements UserService {
 		return dao.login(userId, password);
 	}
 	
-	
+	@Override
+	public String UpdateItem(int itemId, int quantity) {
+		String msg=dao.UpdateItem(itemId, quantity);
+		return msg;
+	}
 	@Override
 	public Cart getCartByCartId(int cartID) {
 		// TODO Auto-generated method stub
 		return dao.getCartByCartId(cartID);
 	}
 
-	@Override
-	public Payment placeOrder(Payment p) {
-		
-		return dao.placeOrder(p);
-	}
-	
+
 	@Override
 	public List<Product> sortProductByHighPrice(String category) {
 		return dao.sortProductByHighPrice(category);
@@ -115,5 +122,12 @@ public class UserServieImpl implements UserService {
 		// TODO Auto-generated method stub
 		return dao.getAllBrands(category);
 	}
-	
+	@Override
+	public double getTotalAmount(int cartId) {
+		return dao.getTotalAmount(cartId);
+	}
+	@Override
+	public double getTotalPriceAmount(int cartId) {
+		return dao.getTotalPriceAmount(cartId);
+	}
 }

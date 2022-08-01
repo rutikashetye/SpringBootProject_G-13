@@ -20,6 +20,10 @@ public class RetailerDaoImpl implements RetailerDao {
 
 	@PersistenceContext
 	EntityManager em;
+	
+
+	
+	@Override
 	@Transactional
 	public Item AddOrUpdateProdcutToCart(Item item) {
 		Item per = em.merge(item);
@@ -52,7 +56,7 @@ public class RetailerDaoImpl implements RetailerDao {
 	}
 
 	@Override
-	public Boolean loginRetailer(int retailerId, String retailerPassword) {
+	public boolean loginRetailer(int retailerId, String retailerPassword) {
 		Retailer retailer = searchRetailerById(retailerId);
 		if (retailer.getRetailerPassword().equals(retailerPassword)) {
 			System.out.println(retailer.isRetailerApproved());

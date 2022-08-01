@@ -2,9 +2,11 @@ package com.lti.service;
 
 import java.util.List;
 
+import com.lti.dto.NewViewCartDto;
 import com.lti.dto.UserResponseDto;
 import com.lti.entity.Cart;
 import com.lti.entity.Category;
+import com.lti.entity.Item;
 import com.lti.entity.Payment;
 import com.lti.entity.Product;
 import com.lti.entity.User;
@@ -17,7 +19,6 @@ public interface UserService {
 	boolean userLogin(int userId, String password);
 	public UserResponseDto addorUpdateUser(User user);
 	public Cart getCartByCartId(int cartID);
-	public Payment placeOrder(Payment p);
 	public List<Product> sortProductByHighPrice(String cat);
 	public List<Product> sortProductByLowPrice(String category);
 	public List<Product> viewProductBasedOnColor(String color,String category);
@@ -28,4 +29,8 @@ public interface UserService {
 	public List<String> getAllcolors(String cat);
 	public List<String> getAllBrands(String cat);
 	public List<String> getNewestProducts(String category);
+	public List<NewViewCartDto> viewCart(int userId);
+	public double getTotalAmount(int cartId);
+	public double getTotalPriceAmount(int cartId);
+	public String UpdateItem(int itemId, int quantity) ;
 }

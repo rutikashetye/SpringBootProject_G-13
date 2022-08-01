@@ -25,9 +25,6 @@ public class Payment {
 	int paymentId;
 	
 	@Enumerated(EnumType.STRING)
-	payType paymentType;
-	
-	@Enumerated(EnumType.STRING)
 	orderStatus status;
 	
 	double amount;
@@ -56,13 +53,6 @@ public class Payment {
 		this.paymentId = paymentId;
 	}
 
-	public payType getPaymentType() {
-		return paymentType;
-	}
-
-	public void setPaymentType(payType paymentType) {
-		this.paymentType = paymentType;
-	}
 
 	public orderStatus getStatus() {
 		return status;

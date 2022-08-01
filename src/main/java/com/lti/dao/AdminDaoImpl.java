@@ -41,6 +41,7 @@ public class AdminDaoImpl implements AdminDao {
 		return Persisted;
 	}
 
+	@Override
 	@Transactional
 	public String approveProduct(int productId) {
 		Product r = em.find(Product.class, productId);
@@ -52,6 +53,7 @@ public class AdminDaoImpl implements AdminDao {
 		return "Products not approved.";
 	}
 
+	@Override
 	@Transactional
 	public String approveRetailer(int retailerId) {
 		Retailer r = em.find(Retailer.class, retailerId);

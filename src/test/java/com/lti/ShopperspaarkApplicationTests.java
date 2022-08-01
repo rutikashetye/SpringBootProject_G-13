@@ -68,6 +68,17 @@ class ShopperspaarkApplicationTests {
 //	}
 //	//Tested
 
+//	@Test
+//	void viewCart()
+//	{
+//		List<Item> li = uCon.viewCart(132);
+//		for(Item i:li )
+//		{
+//			System.out.print(i.getProduct().getProductId());
+//		}
+//	}
+//	
+	
 	@Test
 	void addToCart()
 	{
@@ -81,20 +92,20 @@ class ShopperspaarkApplicationTests {
 		assertNotNull(i2);
 	}
 	
-	
-	@Test
-	void placeOrder() {
-		Cart c = uCon.getCartByCartId(4005);
-		Payment p = new Payment();
-		p.setStatus(orderStatus.placed);
-		p.setAmount(12000);
-		p.setPaymentDate(java.time.LocalDate.now());
-		p.setPaymentType(payType.cash);
-		p.setCart(c);
-		Payment p2 = uCon.placeOrder(p);
-		assertNotNull(p2);
-	}
-	
+//	
+//	@Test
+//	void placeOrder() {
+//		Cart c = uCon.getCartByCartId(4005);
+//		Payment p = new Payment();
+//		p.setStatus(orderStatus.placed);
+//		p.setAmount(12000);
+//		p.setPaymentDate(java.time.LocalDate.now());
+//		p.setPaymentType(payType.cash);
+//		p.setCart(c);
+//		Payment p2 = uCon.placeOrder(p);
+//		assertNotNull(p2);
+//	}
+//	
 	
 	@Test
 	void addRetailer() {

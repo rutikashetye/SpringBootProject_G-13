@@ -49,13 +49,13 @@ public class AdminController {
 		return service.is_approvedProducts();
 	}
 
-	@GetMapping("/approveproduct/{productId}")
+	@PostMapping("/approveproduct/{productId}")
 	public String approveProduct(@PathVariable int productId) {
 		return service.approveProduct(productId);
 	}
 
 	
-	@GetMapping("/approveretailer/{retailerId}")
+	@PostMapping("/approveretailer/{retailerId}")
 	public String approveRetailer(@PathVariable int retailerId) {
 		return service.approveRetailer(retailerId);
 	}

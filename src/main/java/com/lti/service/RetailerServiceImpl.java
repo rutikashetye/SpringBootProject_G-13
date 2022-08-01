@@ -209,6 +209,10 @@ public class RetailerServiceImpl implements RetailerService {
 
 
 
+
+
+
+
 	
 //	public RegResponseDto retailerSignup(Retailer retailer) {	//verify data
 //		try {

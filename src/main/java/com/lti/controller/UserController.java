@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lti.dao.UserDao;
 import com.lti.dto.AddToCartDto;
+import com.lti.dto.NewViewCartDto;
 import com.lti.dto.UserLoginData;
 import com.lti.dto.UserResponseDto;
 import com.lti.entity.Cart;
 import com.lti.entity.Category;
+import com.lti.entity.Item;
 import com.lti.entity.Payment;
 import com.lti.entity.Product;
 import com.lti.entity.User;
@@ -31,6 +34,9 @@ public class UserController {
 
 	@Autowired
 	UserService service;
+	
+	@Autowired
+	UserDao dao;
 	
 	@PostMapping(value="/signup")
 	public UserResponseDto signup(@RequestBody User user) {
@@ -55,13 +61,7 @@ public class UserController {
 	{
 		return service.getCartByCartId(cartId);
 	}
-	
-	@RequestMapping(value="/placeOrder",method=RequestMethod.POST)
-	public Payment placeOrder(@RequestBody Payment p) {
-		Payment m=service.placeOrder(p); 
-	    return m;
-	}
-	
+		
 	@GetMapping("/sortByhighPrice/{category}")
 	public List<Product> sortProductByHighPrice(@PathVariable String category) {
 		return service.sortProductByHighPrice(category);
@@ -87,10 +87,15 @@ public class UserController {
 		return service.viewFourHighestPriceProducts();
 	}
 
-	@PostMapping("/placeOrder/{cartid}")
-	public Payment addToCart(@PathVariable int cartId ) {
+	@PostMapping("/placeOrderFromCart/{cartId}")
+	public String addToCart(@PathVariable int cartId ) {
 		Payment payment=service.placeOrder(cartId); 
-	    return payment;
+		if(payment!=null)
+		{
+			return "Order Placed .";
+		}
+		
+	    return "Something Went Wrong. Try Again Later.";
 	}
 	
 	@PostMapping(value="/addToCart/{productId}/{userId}/{quantity}")
@@ -109,5 +114,28 @@ public class UserController {
 	@GetMapping("/newProducts/{category}")
 	public List<String> getNewestFirst(@PathVariable String category) {
 		return service.getNewestProducts(category);
+	}
+	
+	@GetMapping("/viewCart/{userId}")
+	public List<NewViewCartDto>viewCart(@PathVariable int userId){
+		return service.viewCart(userId);
+	}
+	@GetMapping("/getCartbyUserId/{userId}")
+	public Cart getCartByUserId(@PathVariable int userId ) {
+		return dao.findCartByUserId(userId);
+	}
+	@GetMapping("/getTotalAmount/{cartId}")
+	public double getTotalAmount(@PathVariable int cartId){
+		return service.getTotalAmount(cartId);
+	}
+	
+	@GetMapping("/getTotalPriceAmount/{cartId}")
+	public double getTotalPriceAmount(@PathVariable int cartId){
+		return service.getTotalPriceAmount(cartId);
+	}
+	@PostMapping(value="/updateItem/{itemId}/{quantity}")
+	public String updateItem(@PathVariable("itemId") int itemId,@PathVariable("quantity") int quantity) {
+		return service.UpdateItem(itemId, quantity);
+		
 	}
 }

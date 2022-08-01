@@ -152,7 +152,6 @@ public class Product {
 		this.category = category;
 	}
 
-	@JsonIgnore
 	public Retailer getRetailer() {
 		return retailer;
 	}

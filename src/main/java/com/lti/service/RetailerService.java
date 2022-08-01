@@ -26,7 +26,7 @@ public interface RetailerService {
 	public UpdateProductDto updateProduct(AddProductDto dtoproduct);
 	public RegResponseDto retailerSignup(Retailer retailer);
 	boolean retailerLogin(int retailerId,String retailerPassword);
-
+	
 	
 	
 }

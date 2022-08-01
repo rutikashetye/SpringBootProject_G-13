@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.lti.dto.NewViewCartDto;
 import com.lti.entity.Admin;
 import com.lti.entity.Cart;
 import com.lti.entity.Category;
@@ -22,12 +23,35 @@ import com.lti.entity.Product;
 import com.lti.entity.User;
 import com.lti.entity.Wish;
 import com.lti.entity.orderStatus;
+import java.util.ArrayList;
 
 
 @Repository
 public class UserDaoImpl implements UserDao {
 	@PersistenceContext
 	EntityManager em;
+	
+	
+	@Override
+	public List<NewViewCartDto> viewCart(int userId) {
+		Cart cart=findCartByUserId(userId);
+		List<Item>list=cart.getItems();
+		List<NewViewCartDto>newList=new ArrayList<NewViewCartDto>();
+		for(Item i:list) {
+			if(!(i.isPurchased()))
+			{	NewViewCartDto n = new NewViewCartDto();
+				n.setItem(i);
+				n.setProduct(i.getProduct());
+				System.out.println(i.getProduct().getRetailer());
+				n.setRetailer(i.getProduct().getRetailer());
+				newList.add(n);
+			}
+		}
+		return newList;
+	}
+	
+	
+	
 	@Transactional
 	public User addOrUpdateUser(User user) {
 		User userPersisted = em.merge(user);
@@ -69,28 +93,24 @@ public class UserDaoImpl implements UserDao {
 		return em.find(Cart.class,cartId);
 		
 	}
-	@Transactional
-	public Payment placeOrder(Payment p) {
-		// TODO Auto-generated method stub
-		return em.merge(p);
-	}
+
 	@Override
 	public List<Product> sortProductByHighPrice(String category) {
-		String jpql = "select p from Product p where p.category=:category order by p.price desc";
+		String jpql = "select p from Product p where p.category=:category and p.isApproved=true order by p.price desc";
 		TypedQuery<Product> query = em.createQuery(jpql, Product.class);
 		query.setParameter("category",Category.valueOf(category));
 		return query.getResultList();
 	}
 	@Override
 	public List<Product> sortProductByLowPrice(String category) {
-		String jpql = "select p from Product p where p.category=:category order by p.price";
+		String jpql = "select p from Product p where p.category=:category and p.isApproved=true order by p.price";
 		TypedQuery<Product> query = em.createQuery(jpql, Product.class);
 		query.setParameter("category",Category.valueOf(category));
 		return query.getResultList();
 	}
 
 	public List<Product> viewProductBasedOnColor(String color,String category) {
-		String jpql = "select p from Product p where p.color=:pcolor and p.category=:cat";
+		String jpql = "select p from Product p where p.color=:pcolor and p.category=:cat and p.isApproved=true";
 		TypedQuery<Product> query = em.createQuery(jpql, Product.class);
 		query.setParameter("pcolor", color);
 		query.setParameter("cat", Category.valueOf(category));
@@ -98,7 +118,7 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	public List<Product> viewProductBasedOnBrand(String brand,String category) {
-		String jpql = "select p from Product p where p.brand=:prodbrand and p.category=:cat";
+		String jpql = "select p from Product p where p.brand=:prodbrand and p.category=:cat and p.isApproved=true";
 		TypedQuery<Product> query = em.createQuery(jpql, Product.class);
 		query.setParameter("prodbrand", brand);
 		query.setParameter("cat",Category.valueOf(category));
@@ -107,7 +127,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	public List<Product> viewFourHighestPriceProducts() {
-		String jpql = "select p from Product p order by p.price desc";
+		String jpql = "select p from Product p where p.isApproved=true order by p.price desc";
 		TypedQuery<Product> query = em.createQuery(jpql, Product.class);
 		query.setMaxResults(4);
 		return query.getResultList();
@@ -164,7 +184,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public List<String> getAllColors(String category) {
-		String jpql="select distinct(p.color) from Product p where p.category=:cat";
+		String jpql="select distinct(p.color) from Product p where p.category=:cat and p.isApproved=true";
 		Query query = em.createQuery(jpql);
 		query.setParameter("cat",Category.valueOf(category));
 		return query.getResultList();
@@ -172,7 +192,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public List<String> getAllBrands(String category) {
-		String jpql="select distinct(p.brand) from Product p where p.category=:cat";
+		String jpql="select distinct(p.brand) from Product p where p.category=:cat and p.isApproved=true";
 		Query query = em.createQuery(jpql);
 		query.setParameter("cat",Category.valueOf(category));
 		return query.getResultList();
@@ -180,13 +200,46 @@ public class UserDaoImpl implements UserDao {
 
 	public List<String> getNewestProducts(String category)
 	{
-		String jpql="select p from Product p where p.category=:cat order by p.productId desc";
+		String jpql="select p from Product p where p.category=:cat and p.isApproved=true order by p.productId desc";
 		Query query = em.createQuery(jpql);
 		query.setParameter("cat",Category.valueOf(category));
 		return query.getResultList();
 	}
+	@Override
+	public double getTotalAmount(int cartId) {
+		Cart cart=findCartByCartId(cartId);
+		List<Item>list=cart.getItems();
+		double amount=0;
+		for(Item i:list) {
+			if(!(i.isPurchased())) {
+				amount =amount+(double)i.getTotalPrice();
+				}
+		}
+		return amount;
+	}
 	
+	@Override
+	public double getTotalPriceAmount(int cartId) {
+		Cart cart=findCartByCartId(cartId);
+		List<Item>list=cart.getItems();
+		double amount=0;
+		for(Item i:list) {
+			if(!(i.isPurchased())) {
+				amount =amount+(double)i.getProduct().getPrice()*i.getQuantity();
+				}
+		}
+		return amount;
+	}
 
+	@Transactional
+	public String UpdateItem(int itemId, int quantity) {
+		Item i= em.find(Item.class,itemId);
+		Product p= i.getProduct();
+		i.setQuantity(quantity);
+		em.merge(i);
+		i.setTotalPrice(i.getQuantity()*p.getDiscountedPrice());
+		return "updated";
+	}
 
 	
 	

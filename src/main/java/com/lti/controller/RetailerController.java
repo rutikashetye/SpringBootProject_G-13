@@ -141,16 +141,16 @@ public class RetailerController {
         if(!f.exists())
             f.mkdir();
         String targetFile1 = tempDownloadPath + retailer.getAadharCard();
-       // String targetFile2 = tempDownloadPath + retailer.getPanCard();
+       String targetFile2 = tempDownloadPath + retailer.getPanCard();
         
         //the original location where the uploaded images are present
         String uploadedImagesPath = "d:/uploads/";
         String sourceFile1 = uploadedImagesPath +retailer.getAadharCard();
-      //  String sourceFile2 = uploadedImagesPath +retailer.getPanCard();
+      String sourceFile2 = uploadedImagesPath +retailer.getPanCard();
         
         try {
             FileCopyUtils.copy(new File(sourceFile1), new File(targetFile1));
-          //  FileCopyUtils.copy(new File(sourceFile2), new File(targetFile2));
+          FileCopyUtils.copy(new File(sourceFile2), new File(targetFile2));
         } catch (IOException e) {
             e.printStackTrace();
             //maybe for this customer there is no profile pic
