@@ -2,13 +2,18 @@ package com.lti.dao;
 
 import java.util.List;
 
+import javax.mail.Address;
+
+import com.lti.dto.AddAddressDto;
 import com.lti.dto.NewViewCartDto;
 import com.lti.entity.Cart;
 import com.lti.entity.Category;
 import com.lti.entity.Payment;
 import com.lti.entity.Product;
 import com.lti.entity.User;
-
+import com.lti.entity.UserAddress;
+import com.lti.entity.WishItem;
+import com.lti.dto.ViewOrderDto;
 import com.lti.entity.Item;
 
 
@@ -28,6 +33,7 @@ public interface UserDao {
 //			findWishlistByUserId(int userId) [ru]
 //			placeOrder(Order order)    [ru]
 //			findOrderByUserId(int userId)  [ru]
+	public List<ViewOrderDto> viewOrders(int cartId);
 	public double getTotalAmount(int cartId);
 	public User addOrUpdateUser(User user );
 	public User searchUserById(int userID);
@@ -48,6 +54,16 @@ public interface UserDao {
 	public List<NewViewCartDto> viewCart(int userId);
 	public double getTotalPriceAmount(int cartId);
 	public String UpdateItem(int itemId, int quantity);
+	
+	public String removeItemFromWishList(int wishItemId);
+	public String removeItemFromCart(int itemId) ;
+	public String removeAddressFromAddress(int addressId);
+	public Item getItemByItemId(int itemId);
+	public WishItem addorUpdateWishItem(WishItem wishitem);
+	
+	public UserAddress addUserAddress(AddAddressDto userAddress);
+	public List<UserAddress>viewUserAddressByUserId(int userId) ;
+	
 	
 	
 	

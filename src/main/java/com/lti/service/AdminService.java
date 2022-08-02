@@ -15,5 +15,6 @@ public interface AdminService {
 	public String approveProduct(int productId);
 	public String approveRetailer(int retailerId);
 	public List<Retailer> is_approvedRetailer();
-	
+	public String removeProduct(int productId);
+	public String removeRetailer(int retailerId);
 }

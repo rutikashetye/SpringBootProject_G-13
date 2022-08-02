@@ -17,6 +17,16 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	AdminDao dao;
 	
+	@Override
+	public String removeProduct(int productId) {
+		return dao.removeProduct(productId);
+	}
+	
+	@Override
+	public String removeRetailer(int retailerId) {
+		return dao.removeRetailer(retailerId);
+	}
+	
 	public boolean adminLogin(int adminId, String password) {
 		// TODO Auto-generated method stub
 		return dao.adminLogin(adminId, password);

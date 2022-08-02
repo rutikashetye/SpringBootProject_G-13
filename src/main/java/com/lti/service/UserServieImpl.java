@@ -2,19 +2,25 @@ package com.lti.service;
 
 import java.util.List;
 
+import javax.mail.Address;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lti.dao.UserDao;
+import com.lti.dto.AddAddressDto;
 import com.lti.dto.NewViewCartDto;
 import com.lti.dto.RegResponseDto;
 import com.lti.dto.UserResponseDto;
+import com.lti.dto.ViewOrderDto;
 import com.lti.entity.Cart;
 import com.lti.entity.Category;
 import com.lti.entity.Item;
 import com.lti.entity.Payment;
 import com.lti.entity.Product;
 import com.lti.entity.User;
+import com.lti.entity.UserAddress;
+import com.lti.entity.WishItem;
 
 @Service
 public class UserServieImpl implements UserService {
@@ -130,4 +136,53 @@ public class UserServieImpl implements UserService {
 	public double getTotalPriceAmount(int cartId) {
 		return dao.getTotalPriceAmount(cartId);
 	}
+	@Override
+	public String removeItemFromWishList(int wishItemId) {
+		String msg=dao.removeItemFromWishList(wishItemId);
+		return msg;
+	}
+
+	@Override
+	public String removeItemFromCart(int itemId) {
+		String msg=dao.removeItemFromCart(itemId);
+		return msg;
+	}
+
+	@Override
+	public String removeAddressFromAddress(int addressId) {
+		String msg=dao.removeAddressFromAddress(addressId);
+		return msg;
+	}
+	@Override
+	public String addorUpdateWishItem(WishItem wishitem) {
+		try {
+			WishItem wishitempersisted=dao.addorUpdateWishItem(wishitem);	
+			return "Item added to Wishlist";
+			}
+			catch(Exception e)
+			{
+				return"Could not add item in Wishlist";
+			}
+	}
+	
+	@Override
+	public List<ViewOrderDto> viewOrders(int cartId) {
+		return dao.viewOrders(cartId);
+	}
+
+	@Override
+	public UserAddress addUserAddress(AddAddressDto userAddress){
+	
+		return dao.addUserAddress(userAddress);
+	}
+
+	@Override
+	public List<UserAddress>viewUserAddressByUserId(int userId) {
+		return dao.viewUserAddressByUserId(userId);
+	}
+
+
+	
+	
+	
 }

@@ -1,5 +1,7 @@
 package com.lti.entity;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +25,7 @@ public class Item {
 	int quantity;
 	boolean isPurchased;
 	double totalPrice;
+	LocalDate itemPlacedDate;
 	
 	@ManyToOne
 	@JoinColumn(name="cartId")
@@ -32,6 +35,16 @@ public class Item {
 	@ManyToOne
 	@JoinColumn(name="productId")
 	Product product;
+
+
+	public LocalDate getItemPlacedDate() {
+		return itemPlacedDate;
+	}
+
+
+	public void setItemPlacedDate(LocalDate itemPlacedDate) {
+		this.itemPlacedDate = itemPlacedDate;
+	}
 
 
 	public double getTotalPrice() {

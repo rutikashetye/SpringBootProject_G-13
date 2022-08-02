@@ -25,6 +25,22 @@ public class AdminDaoImpl implements AdminDao {
 	EntityManager em;
 
 	@Override
+	@Transactional
+	public String removeProduct(int productId) {
+		Product p=em.find(Product.class,productId);
+		em.remove(p);
+		return "Product rejected";
+	}
+
+	@Override
+	@Transactional
+	public String removeRetailer(int retailerId) {
+		Retailer r = em.find(Retailer.class,retailerId);
+		em.remove(r);
+		return "Retailer rejected";
+	}
+	
+	@Override
 	public boolean adminLogin(int adminId, String password) {
 		Admin a = em.find(Admin.class, adminId);
 		if (a != null) {

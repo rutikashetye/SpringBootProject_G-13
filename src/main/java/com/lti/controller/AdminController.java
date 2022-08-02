@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +29,21 @@ public class AdminController {
 	@Autowired
 	AdminService service;
 	
+	@DeleteMapping(value="/rejectProduct/{productId}")
+	public String removeItemFromCart(@PathVariable int productId) {
+		String message=service.removeProduct(productId);
+		return message;
+		
+	}
+	
+	@DeleteMapping(value="/rejectRetailer/{retailerId}")
+	public String removeRetailer(@PathVariable int retailerId) {
+		String message=service.removeRetailer(retailerId);
+		return "";
+		
+	}
+	
+	
 	@RequestMapping(value="/add-admin",method=RequestMethod.POST)
 	public String signup(@RequestBody Admin admin) {
 		String m=service.addAdmin(admin); 
@@ -44,7 +60,7 @@ public class AdminController {
 	//Tested
 	
 	
-	@GetMapping("/viewproducts")
+	@GetMapping("/viewApprovedproducts")
 	public List<Product> is_approvedProducts() {
 		return service.is_approvedProducts();
 	}

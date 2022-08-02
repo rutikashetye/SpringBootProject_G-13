@@ -28,6 +28,10 @@ public class RetailerServiceImpl implements RetailerService {
 	@Autowired
 	EmailService emailService;
 	
+	@Override
+	public List<Product> viewAllProductsById(int retailerId) {
+		return dao.viewAllProductsById(retailerId);
+	}
 
 //	public RegResponseDto retailerSignup(Retailer retailer) {	//verify data
 //		try {

@@ -5,6 +5,14 @@ import org.springframework.web.multipart.MultipartFile;
 public class ProductPicDto {
 	private int productId;
 	private MultipartFile productPic;
+	private int retailerId;
+	
+	public int getRetailerId() {
+		return retailerId;
+	}
+	public void setRetailerId(int retailerId) {
+		this.retailerId = retailerId;
+	}
 	public int getProductId() {
 		return productId;
 	}

@@ -20,7 +20,14 @@ public class RetailerDaoImpl implements RetailerDao {
 
 	@PersistenceContext
 	EntityManager em;
-	
+	@Override
+	public List<Product> viewAllProductsById(int retailerId) {
+		String jpql = "select p from Product p where p.retailer.retailerId=:rid";
+		TypedQuery<Product> query = em.createQuery(jpql, Product.class);
+		query.setParameter("rid",retailerId);
+		return query.getResultList();
+	}
+
 
 	
 	@Override
@@ -74,7 +81,9 @@ public class RetailerDaoImpl implements RetailerDao {
 	public Product addOrUpdateProduct(AddProductDto dto) {
 		int retailerId=dto.getRetailerId();
 		Retailer retailer=searchRetailerById(retailerId);
+		System.out.println(retailer.getRetailerId());
 		Product p=dto.getProduct();
+		p.setDiscountedPrice((p.getPrice()*p.getDeal())/100);
 		p.setRetailer(retailer);
 		Product product=em.merge(p);
 		return product;
@@ -97,7 +106,7 @@ public class RetailerDaoImpl implements RetailerDao {
 	}
 
 	public List<Product> viewProductBasedOnCategory(String category) {
-		String jpql = "select p from Product p where p.category=:prodcategory";
+		String jpql = "select p from Product p where p.category=:prodcategory and isApproved=true";
 		TypedQuery<Product> query = em.createQuery(jpql, Product.class);
 		query.setParameter("prodcategory", Category.valueOf(category));
 		return query.getResultList();

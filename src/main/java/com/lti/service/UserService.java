@@ -2,14 +2,20 @@ package com.lti.service;
 
 import java.util.List;
 
+import javax.mail.Address;
+
+import com.lti.dto.AddAddressDto;
 import com.lti.dto.NewViewCartDto;
 import com.lti.dto.UserResponseDto;
+import com.lti.dto.ViewOrderDto;
 import com.lti.entity.Cart;
 import com.lti.entity.Category;
 import com.lti.entity.Item;
 import com.lti.entity.Payment;
 import com.lti.entity.Product;
 import com.lti.entity.User;
+import com.lti.entity.UserAddress;
+import com.lti.entity.WishItem;
 
 public interface UserService {
 
@@ -33,4 +39,13 @@ public interface UserService {
 	public double getTotalAmount(int cartId);
 	public double getTotalPriceAmount(int cartId);
 	public String UpdateItem(int itemId, int quantity) ;
+	public String removeItemFromWishList(int wishItemId);
+	public String removeItemFromCart(int itemId);
+	public String removeAddressFromAddress(int addressId);
+	public String addorUpdateWishItem(WishItem wishitem);
+	public List<ViewOrderDto> viewOrders(int cartId);
+	
+	
+	public UserAddress addUserAddress(AddAddressDto userAddress);
+	public List<UserAddress>viewUserAddressByUserId(int userId);
 }

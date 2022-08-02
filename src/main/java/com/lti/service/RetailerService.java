@@ -27,6 +27,6 @@ public interface RetailerService {
 	public RegResponseDto retailerSignup(Retailer retailer);
 	boolean retailerLogin(int retailerId,String retailerPassword);
 	
-	
+	public List<Product> viewAllProductsById(int retailerId);
 	
 }

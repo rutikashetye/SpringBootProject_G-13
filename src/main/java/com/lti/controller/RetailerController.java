@@ -49,6 +49,11 @@ public class RetailerController {
 	@Autowired
 	RetailerService retailerService;
 	
+	@GetMapping("/viewAllProductsById/{retailerId}")
+	public List<Product> viewAllProductsById(@PathVariable int retailerId) {
+            return service.viewAllProductsById(retailerId);
+        }
+	
 	@RequestMapping(value="/addcart",method=RequestMethod.POST)
 	public Item addproductTocart(@RequestBody Item item) {
 		Item item2=service.AddOrUpdateProdcutToCart(item); 
@@ -69,6 +74,39 @@ public class RetailerController {
 //		boolean isValid=retailerService.retailerLogin(loginData.getRetailerId(),loginData.getRetailerPassword());
 //				return isValid;
 //	}
+	
+	
+	
+	@GetMapping("/productimageDownload")
+    public String productImageDownload(@RequestParam("productId") int productId, HttpServletRequest request) {
+        //fetching customer data from the database
+        Product product = retailerService.getProductByProductId(productId);
+        //reading the project's deployed folder location
+        String projPath = request.getServletContext().getRealPath("/");
+        String tempDownloadPath = projPath + "/downloads/";
+        //creating a folder within the project where we will place the profile pic of the customer getting fetched
+        File f = new File(tempDownloadPath);
+        if(!f.exists())
+            f.mkdir();
+        String targetFile = tempDownloadPath + product.getProductImage();
+        
+        //the original location where the uploaded images are present
+        String uploadedImagesPath = "d:/uploads/";
+        String sourceFile = uploadedImagesPath + product.getProductImage();
+        
+        try {
+            FileCopyUtils.copy(new File(sourceFile), new File(targetFile));
+        } catch (IOException e) {
+            e.printStackTrace();
+            //maybe for this customer there is no profile pic
+        }
+        
+        return "download product done";
+    }
+	
+	
+	
+	
 	
 	@RequestMapping(value="/retailerSignup",method=RequestMethod.POST)
 	public RegResponseDto signup(@RequestBody Retailer retailer) {
@@ -130,7 +168,7 @@ public class RetailerController {
     }
 	
 	@GetMapping("/profile")
-    public Retailer profile(@RequestParam("retailerId") int retailerId, HttpServletRequest request) {
+    public String profile(@RequestParam("retailerId") int retailerId, HttpServletRequest request) {
         //fetching customer data from the database
         Retailer retailer = retailerService.getRetailer(retailerId);
         //reading the project's deployed folder location
@@ -156,7 +194,7 @@ public class RetailerController {
             //maybe for this customer there is no profile pic
         }
         
-        return retailer;
+        return "downloaded retailer documments";
     }
 	
 	@GetMapping("/viewAllRetailer")
@@ -166,6 +204,7 @@ public class RetailerController {
 	
 	@RequestMapping(value="/add-product",method=RequestMethod.POST)
 	public AddproductResponseDto addProduct(@RequestBody AddProductDto product) {
+		System.out.println(product.getRetailerId());
 		 AddproductResponseDto response =retailerService.addProduct(product); 
 	    return response;
 	}
@@ -182,9 +221,11 @@ public class RetailerController {
             return e.getMessage();
         }
         Product dto = retailerService.getProductByProductId(productPicDto.getProductId());
+        System.out.println(dto.getProductId());
         dto.setProductImage(fileName);
-        
+       
         AddProductDto p=new AddProductDto();
+        p.setRetailerId(productPicDto.getRetailerId());
         p.setProduct(dto);
         UpdateProductDto updateProduct=retailerService.updateProduct(p);
                if(updateProduct!=null)

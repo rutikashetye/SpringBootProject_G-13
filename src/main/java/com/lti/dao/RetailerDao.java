@@ -26,5 +26,7 @@ public interface RetailerDao {
 	public List<Product> viewProductBasedOnCategory(String category);
 	public boolean loginRetailer(int retailerId, String retailerPassword);
 	public Product addOrUpdateProduct(AddProductDto dto);
+	public List<Product> viewAllProductsById(int retailerId);
+	
 	
 }

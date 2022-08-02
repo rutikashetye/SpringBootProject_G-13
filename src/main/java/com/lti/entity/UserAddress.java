@@ -86,15 +86,17 @@ public class UserAddress {
 	public void setCountry(String country) {
 		Country = country;
 	}
-
 	@JsonIgnore
-	public User getCustomer() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setCustomer(User user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
+
+	
+	
 	
 	
 

@@ -22,7 +22,8 @@ public interface AdminDao {
 	
 	public List<Retailer> is_approvedRetailer();
 
-	
+	public String removeProduct(int productId) ;
+	public String removeRetailer(int retailerId);
 	
 	
 	

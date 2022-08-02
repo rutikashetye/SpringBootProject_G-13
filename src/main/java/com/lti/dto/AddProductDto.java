@@ -10,15 +10,7 @@ import com.lti.entity.Retailer;
 public class AddProductDto {
 	int retailerId;
 	Product product;
-	Retailer retailer;
 	
-	
-	public Retailer getRetailer() {
-		return retailer;
-	}
-	public void setRetailer(Retailer retailer) {
-		this.retailer = retailer;
-	}
 	public int getRetailerId() {
 		return retailerId;
 	}
